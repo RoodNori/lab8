@@ -44,7 +44,7 @@ namespace Aircompany
         public PassengerPlane GetPassengerPlaneWithMaxPassengersCapacity()
         {
             List<PassengerPlane> passengerPlanes = GetPassengersPlanes();
-            return passengerPlanes.Aggregate((w, x) => w.PassengersCapacityIs() > x.PassengersCapacityIs() ? w : x);             
+            return passengerPlanes.Aggregate((planeCurrent, planeNext) => planeCurrent.passengersCapacity > planeNext.passengersCapacity ? planeCurrent : planeNext);             
         }
 
         public List<MilitaryPlane> GetTransportMilitaryPlanes()
@@ -54,7 +54,7 @@ namespace Aircompany
             for (int i = 0; i < militaryPlanes.Count; i++)
             {
                 MilitaryPlane plane = militaryPlanes[i];
-                if (plane.PlaneTypeIs() == MilitaryType.TRANSPORT)
+                if (plane.Type == MilitaryType.Transport)
                 {
                     transportMilitaryPlanes.Add(plane);
                 }
@@ -63,23 +63,23 @@ namespace Aircompany
             return transportMilitaryPlanes;
         }
 
-        public Airport SortByMaxDistance()
+        public Airport getPlanesSortByMaxDistance()
         {
-            return new Airport(Planes.OrderBy(w => w.MAXFlightDistance()));
+            return new Airport(Planes.OrderBy(plane => plane.maxFlightDistance));
         }
 
         public Airport SortByMaxSpeed()
         {
-            return new Airport(Planes.OrderBy(w => w.GetMS()));
+            return new Airport(Planes.OrderBy(plane => plane.maxSpeed));
         }
 
         public Airport SortByMaxLoadCapacity()
         {
-            return new Airport(Planes.OrderBy(w => w.MAXLoadCapacity()));
+            return new Airport(Planes.OrderBy(plane => plane.maxLoadCapacity));
         }
 
 
-        public IEnumerable<Plane> GetPlanes()
+        public List<Plane> GetPlanes()
         {
             return Planes;
         }
@@ -87,7 +87,7 @@ namespace Aircompany
         public override string ToString()
         {
             return "Airport{" +
-                    "planes=" + string.Join(", ", Planes.Select(x => x.GetModel())) +
+                    "planes=" + string.Join(", ", Planes.Select(x => x.Model)) +
                     '}';
         }
     }

@@ -2,9 +2,9 @@
 {
     public enum ExperimentalTypes
     {
-        LIFTING_BODY,
-        HYPERSONIC,
-        HIGH_ALTITUDE,
+        Liftyng_Body,
+        Hypersonic,
+        High_Altitude,
         VTOL
     }
 }
